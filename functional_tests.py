@@ -53,7 +53,7 @@ class NewVisitorTest(unittest.TestCase):
         #页面再次更新，她的清单中显示了这两个待办事项
         self.check_for_row_in_list_table('1: Buy flowers')
         self.check_for_row_in_list_table('2: Give a gift to Lisi')
-        
+
         #张三想知道这个网站是否会记住他的清单
         #他看到网站为他生成了一个唯一的URL
         self.fail('Finish the test!')
