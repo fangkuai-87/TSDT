@@ -15,7 +15,7 @@ class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-    def  tearDown(self):
+    def tearDown(self):
         self.browser.quit()
 
     def wait_for_row_in_list_table(self, row_text):
@@ -81,7 +81,7 @@ class NewVisitorTest(LiveServerTestCase):
         # 我们使用一个新浏览器会话
         # 确保张三的信息不会从cookie中泄露出去
         self.browser.quit()
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
         # 王五访问首页
         # 页面中看不到张三的清单
