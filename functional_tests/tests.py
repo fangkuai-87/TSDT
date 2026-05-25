@@ -66,6 +66,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy flowers')
         self.wait_for_row_in_list_table('2: Give a gift to Lisi')
 
+
     def test_multiple_users_can_start_lists_at_different_urls(self):
         self.browser.get(self.live_server_url)
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
@@ -105,4 +106,24 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn('Buy flowers', page_text)
         self.assertIn('Buy milk', page_text)
 
+    def test_layerout_and_styling(self):
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+
+        inputbox = self.browser.find_element(By.ID, 'id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
+        # 他新建一个清单,看到输入框仍然完美的居中显示
+        inputbox.send_keys('testing')
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_list_table('1: testing')
+        inputbox = self.browser.find_element(By.ID, 'id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+            )
         # 两人都很满意,然后去睡觉了
